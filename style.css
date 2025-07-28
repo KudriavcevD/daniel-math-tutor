@@ -292,4 +292,12 @@ body {
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }
+  /* Модалка */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; }
+.modal-content { background:#fff; margin:80px auto; padding:20px; border-radius:8px; width:90%; max-width:400px; position:relative; }
+.modal-content .close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.4rem; }
+.auth-form { display:flex; flex-direction:column; gap:12px; }
+.auth-form input { padding:10px; border:1px solid #ccc; border-radius:4px; }
+#profile { background:#eef9ff; }
+
 }
