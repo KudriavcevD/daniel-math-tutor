@@ -1,201 +1,103 @@
-// ========== Firebase Auth ==========
+// --------- Firebase Initialization ---------
+// Ваши реальные значения из Firebase Console:
 const firebaseConfig = {
-    apiKey: "AIzaSyBYbnj35Y4WXSj9VfkgbQkGfLz4kFpnLiM",
-    authDomain: "daniel-math-tutor.firebaseapp.com",
-    projectId: "daniel-math-tutor",
-    storageBucket: "daniel-math-tutor.firebasestorage.app",
-    messagingSenderId: "1022128954602",
-    appId: "1:1022128954602:web:86ef393aba5f7bf2310b93",
-    measurementId: "G-2D28SWWS4X"
-  };
+  apiKey: "AIzaSyBYbnj35Y4WXSj9VfkgbQkGfLz4kFpnLiM",
+  authDomain: "daniel-math-tutor.firebaseapp.com",
+  projectId: "daniel-math-tutor",
+  storageBucket: "daniel-math-tutor.appspot.com",
+  messagingSenderId: "1022128954602",
+  appId: "1:1022128954602:web:86ef393aba5f7bf2310b93",
+  measurementId: "G-2D28SWWS4X"
+};
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// Открыть/закрыть модалку
-function openAuth() { document.getElementById('authModal').style.display = 'block'; }
-function closeAuth(){ document.getElementById('authModal').style.display = 'none'; }
+// --------- Auth UI Logic ---------
+const authModal     = document.getElementById('authModal');
+const loginForm     = document.getElementById('loginForm');
+const registerForm  = document.getElementById('registerForm');
+const loginEmail    = document.getElementById('loginEmail');
+const loginPass     = document.getElementById('loginPass');
+const regEmail      = document.getElementById('regEmail');
+const regPass       = document.getElementById('regPass');
 
-// Показ форм
+function openAuth() { authModal.style.display = 'block'; }
+function closeAuth(){ authModal.style.display = 'none'; }
 function showRegister(){ loginForm.style.display='none'; registerForm.style.display='flex'; }
-function showLogin(){ loginForm.style.display='flex'; registerForm.style.display='none'; }
+function showLogin(){ registerForm.style.display='none'; loginForm.style.display='flex'; }
+function signOut(){ auth.signOut(); }
 
-// Регистрация
+loginForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  auth.signInWithEmailAndPassword(loginEmail.value, loginPass.value)
+    .then(()=>closeAuth())
+    .catch(err=>alert(err.message));
+});
 registerForm.addEventListener('submit', e=>{
   e.preventDefault();
   auth.createUserWithEmailAndPassword(regEmail.value, regPass.value)
-    .then(()=>closeAuth()).catch(err=>alert(err.message));
+    .then(()=>closeAuth())
+    .catch(err=>alert(err.message));
 });
-// Вход
-loginForm .addEventListener('submit', e=>{
-  e.preventDefault();
-  auth.signInWithEmailAndPassword(loginEmail.value, loginPass.value)
-    .then(()=>closeAuth()).catch(err=>alert(err.message));
-});
-// Выход
-function signOut(){ auth.signOut(); }
 
-// Смотрим, залогинен ли юзер
-auth.onAuthStateChanged(user => {
-  const navLogin = document.getElementById('nav-login');
-  const navLogout= document.getElementById('nav-logout');
-  const profile  = document.getElementById('profile');
-  const publicC  = document.getElementById('publicContent');
+auth.onAuthStateChanged(user=>{
+  const navLogin   = document.getElementById('nav-login');
+  const navLogout  = document.getElementById('nav-logout');
+  const profile    = document.getElementById('profile');
+  const publicCont = document.getElementById('publicContent');
   if(user){
     navLogin.style.display='none';
     navLogout.style.display='block';
-    publicC.style.display='none';
+    publicCont.style.display='none';
     profile.style.display='block';
     document.getElementById('userEmail').textContent = user.email;
   } else {
     navLogin.style.display='block';
     navLogout.style.display='none';
-    publicC.style.display='block';
+    publicCont.style.display='block';
     profile.style.display='none';
   }
 });
-// Закрываем модалку при клике на фон
-window.onclick = e => { if(e.target.id==='authModal') closeAuth(); };
+window.onclick = e=>{ if(e.target===authModal) closeAuth(); };
 
-
-
-
-// Элементы
-const authModal = document.getElementById('authModal');
-const loginForm = document.getElementById('loginForm');
-const registerForm = document.getElementById('registerForm');
-const navLogin = document.getElementById('nav-login');
-const navLogout = document.getElementById('nav-logout');
-const profileSection = document.getElementById('profile');
-const publicContent = document.getElementById('publicContent');
-const userEmailEl = document.getElementById('userEmail');
-
-// Открыть модалку
-function openAuth(mode = 'login') {
-  authModal.style.display = 'block';
-  if (mode === 'login') showLogin();
-  else showRegister();
+// --------- Booking Price Calc ---------
+const formatSelect = document.getElementById('formatSelect');
+const totalPrice   = document.getElementById('totalPrice');
+function updatePrice(){
+  const price = Number(formatSelect.value) * 4;
+  totalPrice.textContent = price.toFixed(2);
 }
-function closeAuth() {
-  authModal.style.display = 'none';
-}
-function showLogin() {
-  loginForm.style.display = 'flex';
-  registerForm.style.display = 'none';
-}
-function showRegister() {
-  loginForm.style.display = 'none';
-  registerForm.style.display = 'flex';
-}
+formatSelect.addEventListener('change', updatePrice);
+updatePrice();
 
-// Регистрация
-registerForm.addEventListener('submit', e => {
+// --------- Booking Form Submit ---------
+document.getElementById('bookingForm').addEventListener('submit', e=>{
   e.preventDefault();
-  const email = document.getElementById('regEmail').value;
-  const pass  = document.getElementById('regPass').value;
-  auth.createUserWithEmailAndPassword(email, pass)
-    .then(() => closeAuth())
-    .catch(err => alert(err.message));
-});
-
-// Вход
-loginForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value;
-  const pass  = document.getElementById('loginPass').value;
-  auth.signInWithEmailAndPassword(email, pass)
-    .then(() => closeAuth())
-    .catch(err => alert(err.message));
-});
-
-// Выход
-function signOut() {
-  auth.signOut();
-}
-
-// Следим за статусом пользователя
-auth.onAuthStateChanged(user => {
-  if (user) {
-    // залогинен
-    navLogin.style.display = 'none';
-    navLogout.style.display = 'block';
-    publicContent.style.display = 'none';
-    profileSection.style.display = 'block';
-    userEmailEl.textContent = user.email;
-  } else {
-    // не залогинен
-    navLogin.style.display = 'block';
-    navLogout.style.display = 'none';
-    publicContent.style.display = 'block';
-    profileSection.style.display = 'none';
-  }
-});
-
-// Закрываем модалку кликом на подложку
-window.onclick = e => {
-  if (e.target === authModal) closeAuth();
-};
-
-
-// ========== Ваши существующие скрипты ==========
-document.addEventListener('DOMContentLoaded', () => {
-  // мобильное меню
-  document.querySelector('.toggle-menu').addEventListener('click', () =>
-    document.querySelector('.menu').classList.toggle('open')
-  );
-
-  // кнопка Наверх
-  const scrollBtn = document.getElementById('scrollTopBtn');
-  window.addEventListener('scroll', () => {
-    scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-  scrollBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // FullCalendar расписание
-  const calendarEl = document.getElementById('calendar');
-  if (calendarEl) {
-    new FullCalendar.Calendar(calendarEl, {
-      initialView: 'timeGridWeek',
-      locale: 'ru',
-      allDaySlot: false,
-      slotMinTime: '08:00',
-      slotMaxTime: '20:00',
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'timeGridWeek,timeGridDay'
-      },
-      events: [
-        { title: 'Группа 3 чел.', daysOfWeek: [1,3], startTime: '16:00', endTime: '17:00' },
-        { title: 'Индивидуалка', daysOfWeek: [2,4], startTime: '17:00', endTime: '18:00' },
-        { title: 'Группа 2 чел.', daysOfWeek: [5], startTime: '15:00', endTime: '16:00' }
-      ]
-    }).render();
-  }
-
-  // калькулятор цены (фиксировано 4 урока в месяц)
-  const formatSelect = document.getElementById('formatSelect');
-  const totalPrice = document.getElementById('totalPrice');
-  function updatePrice() {
-    const price = +formatSelect.value;
-    totalPrice.textContent = (price * 4).toFixed(2);
-  }
-  formatSelect.addEventListener('change', updatePrice);
+  alert('Заявка отправлена! Я скоро свяжусь с вами.');
+  e.target.reset();
   updatePrice();
-
-  // отправка формы записи (заглушка)
-  document.getElementById('bookingForm').addEventListener('submit', e => {
-    e.preventDefault();
-    alert('Заявка отправлена! Спасибо, я скоро свяжусь.');
-    e.target.reset();
-    updatePrice();
-  });
-
-  // подписка на рассылку (заглушка)
-  document.getElementById('subscribeForm').addEventListener('submit', e => {
-    e.preventDefault();
-    alert('Вы успешно подписались на рассылку!');
-    e.target.reset();
-  });
 });
+
+// --------- FullCalendar Init ---------
+document.addEventListener('DOMContentLoaded', ()=>{
+  const calendarEl = document.getElementById('calendar');
+  new FullCalendar.Calendar(calendarEl,{
+    initialView: 'timeGridWeek',
+    locale: 'ru',
+    slotMinTime: '08:00:00',
+    slotMaxTime: '21:00:00',
+    events: [
+      // пример: { title: 'Урок', start: '2025-07-29T10:00', end: '2025-07-29T11:00' }
+    ]
+  }).render();
+});
+
+// --------- Scroll to Top ---------
+const scrollBtn = document.getElementById('scrollTopBtn');
+window.onscroll = ()=>{ scrollBtn.style.display = window.scrollY>300 ? 'block' : 'none'; };
+scrollBtn.onclick = ()=> window.scrollTo({ top:0, behavior:'smooth' });
+
+// --------- Mobile Menu Toggle ---------
+const toggleMenu = document.querySelector('.toggle-menu');
+const menu       = document.querySelector('.menu');
+toggleMenu.addEventListener('click', ()=> menu.classList.toggle('open'));
