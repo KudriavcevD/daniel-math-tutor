@@ -115,3 +115,34 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); padding: 10px; }
   .program ol { padding-left: 15px; }
 }
+/* ====== Стили раздела Отзывы ====== */
+#reviews .testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+#reviews details {
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+#reviews summary {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+#reviews summary::marker {
+  font-size: 1.3rem;
+  color: #0077cc;
+}
+#reviews p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+#reviews strong {
+  color: #0077cc;
+}
+
