@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <!-- Хэдер -->
+  <!-- Навигация -->
   <nav class="navbar">
     <div class="container">
       <a href="#" class="logo">Даниэль К.</a>
@@ -26,6 +26,7 @@
         <li><a href="#program">Программа</a></li>
         <li><a href="#schedule">Расписание</a></li>
         <li><a href="#parents">Родителям</a></li>
+        <li><a href="#policy">Условия</a></li>
         <li><a href="#newsletter">Полезно</a></li>
         <li><a href="#contact">Контакты</a></li>
       </ul>
@@ -49,10 +50,10 @@
       <p>Я студент Vilniaus kolegija, с 2024 года провёл более 500 онлайн-занятий. Работаю по методу «спокойного объяснения», без стресса и суеты.</p>
       <div class="video-wrapper">
         <iframe width="560" height="315"
-          src="https://www.youtube.com/embed/ТВОЙ_ID_ЗДЕСЬ"
-          title="Видео-приветствие"
-          frameborder="0"
-          allowfullscreen>
+                src="https://www.youtube.com/embed/ТВОЙ_ID_ЗДЕСЬ"
+                title="Видео-приветствие"
+                frameborder="0"
+                allowfullscreen>
         </iframe>
       </div>
     </div>
@@ -81,7 +82,15 @@
           <input type="text" name="student" required>
         </label>
         <label>Класс:
-          <input type="number" name="grade" min="5" max="10" required>
+          <select name="grade" required>
+            <option value="" disabled selected>Выберите класс</option>
+            <option value="5">5 класс</option>
+            <option value="6">6 класс</option>
+            <option value="7">7 класс</option>
+            <option value="8">8 класс</option>
+            <option value="9">9 класс</option>
+            <option value="10">10 класс</option>
+          </select>
         </label>
         <label>Формат:
           <select id="formatSelect" name="format" required>
@@ -91,10 +100,7 @@
             <option value="8">4 чел. — 8 €/чел</option>
           </select>
         </label>
-        <label>Уроков в месяц:
-          <input type="number" id="lessonsCount" name="lessons" min="1" value="4" required>
-        </label>
-        <p>Итого: <strong id="totalPrice">—</strong> €</p>
+        <p>Итого за месяц (4 урока): <strong id="totalPrice">—</strong> €</p>
         <button type="submit" class="btn">Отправить заявку</button>
       </form>
       <p>После отправки я свяжусь с вами для оплаты и подтверждения записи.</p>
@@ -273,11 +279,11 @@
           <li>Повторение: квадратные уравнения</li>
           <li>Функции: понятие и представление</li>
           <li>Линейная функция и её график</li>
-          <li>Область определения функци</li>
+          <li>Область определения функции</li>
           <li>Построение графиков функций</li>
           <li>Квадратичная функция и её свойства</li>
           <li>Парабола: построение и анализ</li>
-          <li>Системы уравнений с двума переменными</li>
+          <li>Системы уравнений с двумя переменными</li>
           <li>Методы решения систем уравнений</li>
           <li>Неравенства первой степени</li>
           <li>Системы неравенств</li>
@@ -310,7 +316,7 @@
       <details>
         <summary>10 класс (33 темы)</summary>
         <ol>
-          <li>Функци и их виды</li>
+          <li>Функции и их виды</li>
           <li>Арифметическая и геометрическая прогрессии</li>
           <li>Свойства прогрессий</li>
           <li>Сумма членов прогрессии</li>
@@ -485,7 +491,7 @@
     </div>
   </section>
 
-  <!-- Политика отмены и возврата -->
+  <!-- Условия отмены и возврата -->
   <section id="policy" class="section">
     <div class="container">
       <h2>Условия отмены и возврата</h2>
@@ -495,7 +501,7 @@
     </div>
   </section>
 
-  <!-- Рассылка -->
+  <!-- Полезные материалы -->
   <section id="newsletter" class="section">
     <div class="container">
       <h2>Полезные материалы</h2>
@@ -516,9 +522,10 @@
     </div>
   </section>
 
-  <!-- Кнопка Наверх -->
+  <!-- Кнопка «Наверх» -->
   <button id="scrollTopBtn" title="Наверх">↑</button>
 
+  <!-- Футер -->
   <footer class="footer">
     <div class="container">
       <p>© 2025 Даниэль Кудрявцев. Сайт работает 24/7 • <a href="privacy.html">Политика конфиденциальности</a></p>
