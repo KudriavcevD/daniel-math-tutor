@@ -1,0 +1,45 @@
+/* Общие настройки */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; line-height: 1.6; color: #333; }
+
+/* Контейнер для центрирования */
+.container { width: 90%; max-width: 800px; margin: 0 auto; }
+
+/* Навигация */
+.navbar { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.navbar .container { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+.logo { font-size: 1.2rem; font-weight: bold; text-decoration: none; color: #333; }
+.menu { display: flex; list-style: none; }
+.menu li { margin-left: 20px; }
+.menu a { text-decoration: none; color: #333; }
+.toggle-menu { display: none; background: none; border: none; font-size: 1.5rem; }
+
+/* Hero */
+.hero { background: #f0f8ff; text-align: center; padding: 40px 0; }
+.hero-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; }
+.hero h1 { font-size: 2rem; margin-bottom: 10px; }
+.btn { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #0077cc; color: #fff; text-decoration: none; border-radius: 5px; }
+
+/* Секции */
+.section { padding: 40px 0; }
+.section h2 { font-size: 1.8rem; margin-bottom: 20px; }
+.services-list { list-style: none; }
+.services-list li { margin-bottom: 10px; }
+
+/* Отзывы */
+.review { background: #f9f9f9; padding: 20px; border-left: 4px solid #0077cc; margin-bottom: 15px; }
+
+/* Видео */
+.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* Футер */
+.footer { background: #222; color: #fff; text-align: center; padding: 15px 0; margin-top: 40px; }
+
+/* Адаптивное меню */
+@media (max-width: 600px) {
+  .menu { display: none; flex-direction: column; }
+  .toggle-menu { display: block; }
+  .menu.open { display: flex; background: #fff; position: absolute; top: 60px; right: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+  .menu li { margin: 10px 0; }
+}
