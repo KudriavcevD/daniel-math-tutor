@@ -35,19 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }).render();
   }
 
-  // калькулятор цены в форме
+  // калькулятор цены (фиксировано 4 урока в месяц)
   const formatSelect = document.getElementById('formatSelect');
-  const lessonsInput = document.getElementById('lessonsCount');
   const totalPrice = document.getElementById('totalPrice');
   function updatePrice() {
     const price = +formatSelect.value;
-    totalPrice.textContent = (price * +lessonsInput.value).toFixed(2);
+    totalPrice.textContent = (price * 4).toFixed(2);
   }
   formatSelect.addEventListener('change', updatePrice);
-  lessonsInput.addEventListener('input', updatePrice);
   updatePrice();
 
-  // обработка формы записи (заглушка)
+  // отправка формы записи (заглушка)
   document.getElementById('bookingForm').addEventListener('submit', e => {
     e.preventDefault();
     alert('Заявка отправлена! Спасибо, я скоро свяжусь.');
