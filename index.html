@@ -11,10 +11,10 @@
   <nav class="navbar">
     <div class="container">
       <a href="#" class="logo">Даниэль К.</a>
-      <button class="toggle-menu">☰</button>
+      <button class="toggle-menu" aria-label="Меню">☰</button>
       <ul class="menu">
         <li><a href="#about">Обо мне</a></li>
-        <li><a href="#services">Форматы и цены</a></li>
+        <li><a href="#services">Услуги & цены</a></li>
         <li><a href="#reviews">Отзывы</a></li>
         <li><a href="#contact">Контакты</a></li>
       </ul>
@@ -23,7 +23,7 @@
 
   <header class="hero">
     <div class="container">
-      <img src="photo-placeholder.jpg" alt="Моя фотография" class="hero-photo">
+      <img src="photo-placeholder.jpg" alt="Даниэль Кудрявцев" class="hero-photo">
       <h1>Привет! Я Даниэль Кудрявцев</h1>
       <p>Онлайн-репетитор по математике<br>«Математика без стресса»</p>
       <a href="#contact" class="btn">Записаться на урок</a>
@@ -35,7 +35,12 @@
       <h2>Обо мне</h2>
       <p>Я студент Vilniaus kolegija, с 2024 года преподаю математику онлайн. За это время провёл более 500 занятий, помогая ученикам понять математику спокойно и доступно.</p>
       <div class="video-wrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ТВОЙ_ID_ЗДЕСЬ" title="Видео-приветствие" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/ТВОЙ_ID_ЗДЕСЬ"
+          title="Видео-приветствие"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
   </section>
@@ -75,6 +80,9 @@
       <a href="https://t.me/ТВОЙ_ЮЗЕРНЕЙМ" class="btn">Написать в Telegram</a>
     </div>
   </section>
+
+  <!-- Кнопка «Наверх» -->
+  <button id="scrollTopBtn" title="Наверх">↑</button>
 
   <footer class="footer">
     <div class="container">
