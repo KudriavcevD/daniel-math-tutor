@@ -11,6 +11,54 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+// Открыть/закрыть модалку
+function openAuth() { document.getElementById('authModal').style.display = 'block'; }
+function closeAuth(){ document.getElementById('authModal').style.display = 'none'; }
+
+// Показ форм
+function showRegister(){ loginForm.style.display='none'; registerForm.style.display='flex'; }
+function showLogin(){ loginForm.style.display='flex'; registerForm.style.display='none'; }
+
+// Регистрация
+registerForm.addEventListener('submit', e=>{
+  e.preventDefault();
+  auth.createUserWithEmailAndPassword(regEmail.value, regPass.value)
+    .then(()=>closeAuth()).catch(err=>alert(err.message));
+});
+// Вход
+loginForm .addEventListener('submit', e=>{
+  e.preventDefault();
+  auth.signInWithEmailAndPassword(loginEmail.value, loginPass.value)
+    .then(()=>closeAuth()).catch(err=>alert(err.message));
+});
+// Выход
+function signOut(){ auth.signOut(); }
+
+// Смотрим, залогинен ли юзер
+auth.onAuthStateChanged(user => {
+  const navLogin = document.getElementById('nav-login');
+  const navLogout= document.getElementById('nav-logout');
+  const profile  = document.getElementById('profile');
+  const publicC  = document.getElementById('publicContent');
+  if(user){
+    navLogin.style.display='none';
+    navLogout.style.display='block';
+    publicC.style.display='none';
+    profile.style.display='block';
+    document.getElementById('userEmail').textContent = user.email;
+  } else {
+    navLogin.style.display='block';
+    navLogout.style.display='none';
+    publicC.style.display='block';
+    profile.style.display='none';
+  }
+});
+// Закрываем модалку при клике на фон
+window.onclick = e => { if(e.target.id==='authModal') closeAuth(); };
+
+
+
+
 // Элементы
 const authModal = document.getElementById('authModal');
 const loginForm = document.getElementById('loginForm');
