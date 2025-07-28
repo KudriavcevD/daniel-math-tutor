@@ -1,5 +1,4 @@
 // --------- Firebase Initialization ---------
-// Ваши реальные значения из Firebase Console:
 const firebaseConfig = {
   apiKey: "AIzaSyBYbnj35Y4WXSj9VfkgbQkGfLz4kFpnLiM",
   authDomain: "daniel-math-tutor.firebaseapp.com",
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     slotMinTime: '08:00:00',
     slotMaxTime: '21:00:00',
     events: [
-      // пример: { title: 'Урок', start: '2025-07-29T10:00', end: '2025-07-29T11:00' }
+      // сюда можно добавить ваши расписания
     ]
   }).render();
 });
